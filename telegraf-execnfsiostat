@@ -1,0 +1,113 @@
+#!/bin/bash
+# Outputs nfsiostat metrics to telegraf
+
+mounts_info=$(nfsiostat 1 2)
+
+for mount in $(echo "$mounts_info"|grep mounted|sort -u|awk '{print $NF}'|awk -F: '{print $1}'|tr '\n' ' ')
+do
+    read=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 read|grep -v read|tail -n1)
+    write=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 write|grep -v write|tail -n1)
+    general=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 bklog|grep -v bklog|tail -n1)
+
+    read_ops_sec=$(echo "$read"|awk '{print $1}')
+    read_kbs=$(echo "$read"|awk '{print $2}')
+    read_kbop=$(echo "$read"|awk '{print $3}')
+    read_retrans=$(echo "$read"|awk '{print $4}')
+    read_avg_rtt=$(echo "$read"|awk '{print $6}')
+    read_avg_exe=$(echo "$read"|awk '{print $7}')
+
+    write_ops_sec=$(echo "$write"|awk '{print $1}')
+    write_kbs=$(echo "$write"|awk '{print $2}')
+    write_kbop=$(echo "$write"|awk '{print $3}')
+    write_retrans=$(echo "$write"|awk '{print $4}')
+    write_avg_rtt=$(echo "$write"|awk '{print $6}')
+    write_avg_exe=$(echo "$write"|awk '{print $7}')
+
+    general_ops_sec=$(echo "$general"|awk '{print $1}')
+    general_rpc_bklog=$(echo "$general"|awk '{print $2}')
+
+    echo "execnfsiostat,mount=$mount,option=none,type=read ops_sec=$read_ops_sec,kbs=$read_kbs,kbop=$read_kbop,retrans=$read_retrans,avg_rtt=$read_avg_rtt,avg_exe=$read_avg_exe"
+    echo "execnfsiostat,mount=$mount,option=none,type=write ops_sec=$write_ops_sec,kbs=$write_kbs,kbop=$write_kbop,retrans=$write_retrans,avg_rtt=$write_avg_rtt,avg_exe=$write_avg_exe"
+    echo "execnfsiostat,mount=$mount,option=none,type=general ops_sec=$general_ops_sec,rpc_bklog=$general_rpc_bklog"
+done
+
+mounts_info=$(nfsiostat)
+
+for mount in $(echo "$mounts_info"|grep mounted|sort -u|awk '{print $NF}'|awk -F: '{print $1}'|tr '\n' ' ')
+do
+    read=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 read|grep -v read|tail -n1)
+    write=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 write|grep -v write|tail -n1)
+    general=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 bklog|grep -v bklog|tail -n1)
+
+    # echo "mount: $mount"
+    # echo "read: $read"
+    # echo "write: $write"
+    # echo "general: $general"
+
+    read_ops_sec=$(echo "$read"|awk '{print $1}')
+    read_kbs=$(echo "$read"|awk '{print $2}')
+    read_kbop=$(echo "$read"|awk '{print $3}')
+    read_retrans=$(echo "$read"|awk '{print $4}')
+    read_avg_rtt=$(echo "$read"|awk '{print $6}')
+    read_avg_exe=$(echo "$read"|awk '{print $7}')
+
+    write_ops_sec=$(echo "$write"|awk '{print $1}')
+    write_kbs=$(echo "$write"|awk '{print $2}')
+    write_kbop=$(echo "$write"|awk '{print $3}')
+    write_retrans=$(echo "$write"|awk '{print $4}')
+    # echo "mount: $mount"
+    # echo "read: $read"
+    # echo "write: $write"
+    # echo "general: $general"
+
+    read_ops_sec=$(echo "$read"|awk '{print $1}')
+    read_kbs=$(echo "$read"|awk '{print $2}')
+    read_kbop=$(echo "$read"|awk '{print $3}')
+    read_retrans=$(echo "$read"|awk '{print $4}')
+    read_avg_rtt=$(echo "$read"|awk '{print $6}')
+    read_avg_exe=$(echo "$read"|awk '{print $7}')
+
+    write_ops_sec=$(echo "$write"|awk '{print $1}')
+    write_kbs=$(echo "$write"|awk '{print $2}')
+    write_kbop=$(echo "$write"|awk '{print $3}')
+    write_retrans=$(echo "$write"|awk '{print $4}')
+    write_avg_rtt=$(echo "$write"|awk '{print $6}')
+    write_avg_exe=$(echo "$write"|awk '{print $7}')
+
+    general_ops_sec=$(echo "$general"|awk '{print $1}')
+    general_rpc_bklog=$(echo "$general"|awk '{print $2}')
+
+    echo "execnfsiostat,mount=$mount,option=none,type=read ops_sec=$read_ops_sec,kbs=$read_kbs,kbop=$read_kbop,retrans=$read_retrans,avg_rtt=$read_avg_rtt,avg_exe=$read_avg_exe"
+    echo "execnfsiostat,mount=$mount,option=none,type=write ops_sec=$write_ops_sec,kbs=$write_kbs,kbop=$write_kbop,retrans=$write_retrans,avg_rtt=$write_avg_rtt,avg_exe=$write_avg_exe"
+    echo "execnfsiostat,mount=$mount,option=none,type=general ops_sec=$general_ops_sec,rpc_bklog=$general_rpc_bklog"
+done
+
+mounts_info=$(nfsiostat)
+
+for mount in $(echo "$mounts_info"|grep mounted|sort -u|awk '{print $NF}'|awk -F: '{print $1}'|tr '\n' ' ')
+do
+    read=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 read|grep -v read|tail -n1)
+    write=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 write|grep -v write|tail -n1)
+    general=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 bklog|grep -v bklog|tail -n1)
+
+    read_ops_sec=$(echo "$read"|awk '{print $1}')
+    read_kbs=$(echo "$read"|awk '{print $2}')
+    read_kbop=$(echo "$read"|awk '{print $3}')
+    read_retrans=$(echo "$read"|awk '{print $4}')
+    read_avg_rtt=$(echo "$read"|awk '{print $6}')
+    read_avg_exe=$(echo "$read"|awk '{print $7}')
+
+    write_ops_sec=$(echo "$write"|awk '{print $1}')
+    write_kbs=$(echo "$write"|awk '{print $2}')
+    write_kbop=$(echo "$write"|awk '{print $3}')
+    write_retrans=$(echo "$write"|awk '{print $4}')
+    write_avg_rtt=$(echo "$write"|awk '{print $6}')
+    write_avg_exe=$(echo "$write"|awk '{print $7}')
+
+    general_ops_sec=$(echo "$general"|awk '{print $1}')
+    general_rpc_bklog=$(echo "$general"|awk '{print $2}')
+
+    echo "execnfsiostat,mount=$mount,option=total,type=read ops_sec=$read_ops_sec,kbs=$read_kbs,kbop=$read_kbop,retrans=$read_retrans,avg_rtt=$read_avg_rtt,avg_exe=$read_avg_exe"
+    echo "execnfsiostat,mount=$mount,option=total,type=write ops_sec=$write_ops_sec,kbs=$write_kbs,kbop=$write_kbop,retrans=$write_retrans,avg_rtt=$write_avg_rtt,avg_exe=$write_avg_exe"
+    echo "execnfsiostat,mount=$mount,option=total,type=general ops_sec=$general_ops_sec,rpc_bklog=$general_rpc_bklog"
+done
