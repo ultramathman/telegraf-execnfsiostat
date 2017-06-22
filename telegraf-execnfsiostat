@@ -39,11 +39,6 @@ do
     write=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 write|grep -v write|tail -n1)
     general=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 bklog|grep -v bklog|tail -n1)
 
-    # echo "mount: $mount"
-    # echo "read: $read"
-    # echo "write: $write"
-    # echo "general: $general"
-
     read_ops_sec=$(echo "$read"|awk '{print $1}')
     read_kbs=$(echo "$read"|awk '{print $2}')
     read_kbop=$(echo "$read"|awk '{print $3}')
@@ -55,10 +50,6 @@ do
     write_kbs=$(echo "$write"|awk '{print $2}')
     write_kbop=$(echo "$write"|awk '{print $3}')
     write_retrans=$(echo "$write"|awk '{print $4}')
-    # echo "mount: $mount"
-    # echo "read: $read"
-    # echo "write: $write"
-    # echo "general: $general"
 
     read_ops_sec=$(echo "$read"|awk '{print $1}')
     read_kbs=$(echo "$read"|awk '{print $2}')
