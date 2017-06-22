@@ -9,7 +9,7 @@ Sample telegraf configuration file, place in /etc/telegraf/telegraf.d/nfsiostat.
   # compatible with old version
   # we can still use the old command configuration
   # command = "/usr/bin/line_protocol_collector"
-  commands = ["/usr/local/bin/influx_nfsiostat"]
+  commands = ["/usr/local/bin/telegraf-execnfsiostat"]
   ## Timeout for each command to complete.
   timeout = "5s"
   # Data format to consume.
