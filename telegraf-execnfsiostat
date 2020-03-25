@@ -5,9 +5,9 @@ mounts_info=$(nfsiostat 1 2)
 
 for mount in $(echo "$mounts_info"|grep mounted|sort -u|awk '{print $NF}'|awk -F: '{print $1}'|tr '\n' ' ')
 do
-    read=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 read|grep -v read|tail -n1)
-    write=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 write|grep -v write|tail -n1)
-    general=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 bklog|grep -v bklog|tail -n1)
+    read=$(echo "$mounts_info"|grep -A8 $mount|grep -A1 read|grep -v read|tail -n1)
+    write=$(echo "$mounts_info"|grep -A8 $mount|grep -A1 write|grep -v write|tail -n1)
+    general=$(echo "$mounts_info"|grep -A8 $mount|grep -A1 bklog|grep -v bklog|tail -n1)
 
     read_ops_sec=$(echo "$read"|awk '{print $1}')
     read_kbs=$(echo "$read"|awk '{print $2}')
@@ -35,9 +35,9 @@ mounts_info=$(nfsiostat)
 
 for mount in $(echo "$mounts_info"|grep mounted|sort -u|awk '{print $NF}'|awk -F: '{print $1}'|tr '\n' ' ')
 do
-    read=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 read|grep -v read|tail -n1)
-    write=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 write|grep -v write|tail -n1)
-    general=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 bklog|grep -v bklog|tail -n1)
+    read=$(echo "$mounts_info"|grep -A8 $mount|grep -A1 read|grep -v read|tail -n1)
+    write=$(echo "$mounts_info"|grep -A8 $mount|grep -A1 write|grep -v write|tail -n1)
+    general=$(echo "$mounts_info"|grep -A8 $mount|grep -A1 bklog|grep -v bklog|tail -n1)
 
     read_ops_sec=$(echo "$read"|awk '{print $1}')
     read_kbs=$(echo "$read"|awk '{print $2}')
@@ -77,9 +77,9 @@ mounts_info=$(nfsiostat)
 
 for mount in $(echo "$mounts_info"|grep mounted|sort -u|awk '{print $NF}'|awk -F: '{print $1}'|tr '\n' ' ')
 do
-    read=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 read|grep -v read|tail -n1)
-    write=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 write|grep -v write|tail -n1)
-    general=$(echo "$mounts_info"|grep -A7 $mount|grep -A1 bklog|grep -v bklog|tail -n1)
+    read=$(echo "$mounts_info"|grep -A8 $mount|grep -A1 read|grep -v read|tail -n1)
+    write=$(echo "$mounts_info"|grep -A8 $mount|grep -A1 write|grep -v write|tail -n1)
+    general=$(echo "$mounts_info"|grep -A8 $mount|grep -A1 bklog|grep -v bklog|tail -n1)
 
     read_ops_sec=$(echo "$read"|awk '{print $1}')
     read_kbs=$(echo "$read"|awk '{print $2}')
